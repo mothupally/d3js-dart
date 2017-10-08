@@ -1,0 +1,25 @@
+<div id="chart">
+  <svg width=2133 height=1082> 
+      <g id="arcs" transform="translate(1065,541)"></g>
+      <g id="xaxes" transform="translate(1065,541)"></g>
+      <g id="yaxes" transform="translate(1065,541)"></g>
+      <g id="circle" transform="translate(1065,541)"></g>
+    </svg>
+</div>
+<!-- Arcs -->
+<div ng-repeat="arc in $ctrl.arcs">
+  <bullseye-arc scoreid="arc.arcid" 
+    start-angle="arc.startangle" 
+    end-angle="arc.endangle" 
+    inner-radius="arc.innerradius" 
+    outer-radius="arc.outerradius" 
+    padding="2" 
+    strategy="arc.strategy"
+    segment="arc.segment"
+    audience="arc.audience" 
+    svg-parent="chart" 
+    label="arc.label"
+    arc-clicked="$ctrl.arclicked(data)">
+  </bullseye-arc>
+</div>
+

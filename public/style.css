@@ -1,0 +1,27 @@
+.arc {
+    fill: #FFFFFF;
+}
+
+.customer-arc {
+    fill: #000000;
+}
+.axis {
+    fill: none;
+    stroke: #AE9D63;
+    stroke-width: 14px;
+    z-index: 200;
+}
+
+.tick line {
+    visibility: hidden;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    height: 200px;
+    width: 300px;
+}
