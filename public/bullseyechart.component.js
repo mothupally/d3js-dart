@@ -5,7 +5,8 @@
       segments: '<',
       audience: '<',
       width: '<',
-      height: '<'
+      height: '<',
+      data: '<'
     },
     controller: ChartController,
     templateUrl: "./bullseyechart.template.html"
@@ -24,6 +25,14 @@
       drawStratergyTextElements();
     }
 
+    function findElement(array, element){
+      for(var i=0; i< array.length; i++){
+        if(array[i].name === element){
+          return array[i];
+        }
+      }
+    }
+    
     function createArcsdata() {
       var radiusWidth = outerRadius - innerRadius;
       var baseangle = 0;
@@ -34,6 +43,7 @@
         var audience = '';
         var segment = '';
         var label = '';
+        var score = 0;
         for (var j = 0; j < ctrl.segments.length; j++) {
           var crossangle = 90 / ctrl.segments[j].audience.length;
           var startangle = j * 90;
@@ -48,7 +58,8 @@
             if (i === ctrl.strategies.length - 1) {
               label = audience;
             }
-
+            var strategydata = findElement(ctrl.data, strategy);
+            score = strategydata.data[segment][audience];
             ctrl.arcs.push({
               arcid: "arc_" + i + "_" + j + "_" + l,
               innerradius: innerRadius,
@@ -58,7 +69,8 @@
               strategy: strategy,
               segment: segment,
               audience: audience,
-              label: label
+              label: label,
+              score: score
             });
           }
         }

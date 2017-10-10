@@ -2,6 +2,10 @@
     fill: #FFFFFF;
 }
 
+.arc:hover {
+    fill: #E2DBC7;
+}
+
 .customer-arc {
     fill: #000000;
 }
@@ -16,12 +20,97 @@
     visibility: hidden;
 }
 
-.tooltip {
+.scorebox {
     display: none;
     position: absolute;
-    background: lightsteelblue;
+    background: #25263D;
     border: 0px;
-    border-radius: 8px;
-    height: 200px;
-    width: 300px;
+    border-radius: 5px;
+    height: 83px;
+    width: 306px;
+    color: #FFFFFF;
+}
+
+.clickable {
+  cursor: pointer; 
+  }
+
+.icon--close line {
+  fill: none;
+  stroke: #FFFFFF;
+  stroke-linecap: round;
+  stroke-width: .15rem;
+  stroke-miterlimit: 10; 
+  }
+
+  .slidercontainer{
+    padding-left: 20px;
+    padding-top: 18px;
+    height: 20px;
+    width: 250px;
+  }
+  .close-icon {
+    position: relative;
+    float: right;
+    width: 11px;
+    z-index: 102; 
+    padding-top: 4px;
+    padding-right: 7px;
+  }
+  
+  .score-content{
+    font-size: 0.6em;
+    padding-left: 20px;
+    padding-top: 25px;
+    color: #FFFFFF;
+  }
+.score-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: green;
+}
+.custom-slider.rzslider .rz-bar {
+  background: #ffe4d1;
+  height: 2px;
+}
+.custom-slider.rzslider .rz-selection {
+  background: orange;
+}
+
+.custom-slider.rzslider .rz-pointer {
+  width: 8px;
+  height: 16px;
+  top: auto; /* to remove the default positioning */
+  bottom: 0;
+  background-color: #333;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.custom-slider.rzslider .rz-pointer:after {
+  display: none;
+}
+
+.custom-slider.rzslider .rz-bubble {
+  padding-bottom: 4px;
+  color: #FFFFFF;
+}
+
+.custom-slider.rzslider .rz-limit {
+  font-weight: bold;
+  color: orange;
+}
+
+.custom-slider.rzslider .rz-tick {
+  width: 1px;
+  height: 10px;
+  margin-left: 4px;
+  border-radius: 0;
+  background: #ffe4d1;
+  top: -1px;
+}
+
+.custom-slider.rzslider .rz-tick.rz-selected {
+  background: orange;
 }
