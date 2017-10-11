@@ -6,6 +6,14 @@
     fill: #E2DBC7;
 }
 
+.user-arc {
+    fill: #B7DDB5;
+}
+
+.user-arc:hover {
+    fill: #E2DBC7;
+}
+
 .customer-arc {
     fill: #000000;
 }

@@ -15,7 +15,14 @@
 </head>
 
 <body ng-app="bullseye" ng-controller="AppController as app" style="background-color: #AE9D63">
-    <bullseye-chart strategies="app.strategies" segments="app.segments" width="app.width" height="app.height" data=app.data></bullseye-chart>
+    <bullseye-chart 
+      strategies="app.strategies" 
+      segments="app.segments" 
+      width="app.width" 
+      height="app.height" 
+      data=app.data 
+      on-update="app.callback(selectedScore)">
+    </bullseye-chart>
 </body>
 
 </html>

@@ -8,7 +8,7 @@
 </div>
 <!-- Arcs -->
 <div ng-repeat="arc in $ctrl.arcs">
-  <bullseye-arc scoreid="arc.arcid" 
+  <bullseye-arc scoreid="arc.scoreid" 
     start-angle="arc.startangle" 
     end-angle="arc.endangle" 
     inner-radius="arc.innerradius" 
@@ -20,7 +20,8 @@
     svg-parent="chart" 
     label="arc.label",
     score="arc.score",
-    arc-clicked="$ctrl.arclicked(data)">
+    arc-clicked="$ctrl.arclicked(data)",
+    arc-callback="$ctrl.callback(selectedScore, scoreid)">
   </bullseye-arc>
 </div>
 

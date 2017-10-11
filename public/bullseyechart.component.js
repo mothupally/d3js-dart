@@ -6,7 +6,8 @@
       audience: '<',
       width: '<',
       height: '<',
-      data: '<'
+      data: '<',
+      onUpdate: '&'
     },
     controller: ChartController,
     templateUrl: "./bullseyechart.template.html"
@@ -26,6 +27,9 @@
     }
 
     function findElement(array, element){
+      if(!Array.isArray(array)){
+        return;
+      }
       for(var i=0; i< array.length; i++){
         if(array[i].name === element){
           return array[i];
@@ -43,7 +47,11 @@
         var audience = '';
         var segment = '';
         var label = '';
-        var score = 0;
+        var score = {
+          userValue: '',
+          avgValue: '',
+          isEnabled: true
+        };
         for (var j = 0; j < ctrl.segments.length; j++) {
           var crossangle = 90 / ctrl.segments[j].audience.length;
           var startangle = j * 90;
@@ -58,10 +66,13 @@
             if (i === ctrl.strategies.length - 1) {
               label = audience;
             }
-            var strategydata = findElement(ctrl.data, strategy);
-            score = strategydata.data[segment][audience];
+            var segmentdata = findElement(ctrl.data, strategy);
+            if(segmentdata && segmentdata.data && segmentdata.data[segment]){
+             score = findElement(segmentdata.data[segment], audience);
+            }
             ctrl.arcs.push({
-              arcid: "arc_" + i + "_" + j + "_" + l,
+              name: "arc_" + i + "_" + j + "_" + l,
+              scoreid: "arc_" + i + "_" + j + "_" + l,
               innerradius: innerRadius,
               outerradius: outerRadius,
               startangle: startangle,
@@ -151,6 +162,16 @@
 
     ctrl.arclicked = function (data) {
       // Make a service call and save the data model
+    }
+    
+    ctrl.callback = function(selectedScore, scoreid){
+      score = selectedScore;
+      scoreid = scoreid;
+      var arc = findElement(ctrl.arcs, scoreid);
+      if(arc){
+        arc.score = selectedScore;
+      }
+      ctrl.onUpdate({selectedScore: selectedScore});
     }
   }
 })();
