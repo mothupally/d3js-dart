@@ -27,6 +27,9 @@
     var arc;
     var ctrl = this;
     var scoreElement;
+    var poorColor = 'red';
+    var avgColor = 'orange';
+    var goodColor = '#2AE02A';
     
     ctrl.$onInit = function () {
       initializeSlider();
@@ -46,21 +49,21 @@
           step: 1,
           showSelectionBar: true,
           getPointerColor: function (value) {
-            if (value <= 4)
-              return 'red';
-            if (value <= 7)
-              return 'orange';
-            return '#2AE02A';
+            return getPerfColor(value);
           },
           getSelectionBarColor: function(value) {
-             if (value <= 4)
-              return 'red';
-            if (value <= 7)
-              return 'orange';
-            return '#2AE02A';
-        }
+             return getPerfColor(value);
+          }
         }
       };
+    }
+    
+    function getPerfColor(value){
+       if (value <= 4)
+         return poorColor;
+      if (value <= 7)
+        return avgColor;
+      return goodColor;
     }
 
     ctrl.$onChanges = function(componentProperties){
@@ -115,14 +118,8 @@
     }
     
     function setScore(svg, score){
-      var scoreColor = 'green';
-      if(score.avgValue <= 4)
-        scoreColor = 'red';
-      else if (score.avgValue <= 7)
-        scoreColor = 'orange';
-      else
-        scoreColor = '#2AE02A';
-      
+      var scoreColor = getPerfColor(score.avgValue);
+
        var circle = svg.append("circle")
       .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
       .attr("cx", function(d) { return "translate(" + arc.centroid(d) + ")"; })
