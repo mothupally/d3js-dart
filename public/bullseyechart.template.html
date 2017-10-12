@@ -4,7 +4,13 @@
       <g id="xaxes" transform="translate(1065,541)"></g>
       <g id="yaxes" transform="translate(1065,541)"></g>
       <g id="circle" transform="translate(1065,541)"></g>
+      <g id="icons" transform="translate(1065,541)"></g>
     </svg>
+</div>
+<div ng-repeat="stg in $ctrl.strategies">
+  <div id="{{$ctrl.getStrategyId(stg)}}" class="strategy-tooltip">
+      <span>{{stg}}</span>
+  </div>
 </div>
 <!-- Arcs -->
 <div ng-repeat="arc in $ctrl.arcs">
@@ -20,6 +26,7 @@
     svg-parent="chart" 
     label="arc.label",
     score="arc.score",
+    user-score="arc.userValue",
     arc-clicked="$ctrl.arclicked(data)",
     arc-callback="$ctrl.callback(selectedScore, scoreid)">
   </bullseye-arc>

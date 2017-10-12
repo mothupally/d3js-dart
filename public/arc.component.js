@@ -13,6 +13,7 @@
       svgParent: "@",
       label: "<",
       score: "<",
+      userScore: "<",
       arcClicked: "&",
       arcCallback: "&"
     },
@@ -86,8 +87,8 @@
         .padAngle(0.001);
 
         
-        enableClick(svg, arc, id);
-        
+        setArcColor(svg, arc, id);
+       // enableClick(score);
         setSegmentLabel(svg, label, id);
         if(score && score.avgValue){
           setScore(svg, score);
@@ -95,7 +96,7 @@
         
     }
 
-    function enableClick(svg, arc, id){
+    function setArcColor(svg, arc, id){
       var arcClass = 'arc';
       if(ctrl.score && ctrl.score.userAccessed){
         arcClass = 'user-arc';
@@ -105,6 +106,12 @@
         .attr("d", arc)
         .attr("id", function (d, i) { return "id_" + id; })
         .on("click", arcClick);
+    }
+    
+    function enableClick(score){
+      if(score && score.isEnabled){
+        svg.on("click", arcClick);
+      }
     }
     
     function setSegmentLabel(svg, label, id){

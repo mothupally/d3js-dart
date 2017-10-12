@@ -24,6 +24,7 @@
       drawAxes();
       drawCircle();
       drawStratergyTextElements();
+      setupStratergyIcons();
     }
 
     function findElement(array, element){
@@ -50,6 +51,7 @@
         var score = {
           userValue: '',
           avgValue: '',
+          userAccessed: false,
           isEnabled: true
         };
         for (var j = 0; j < ctrl.segments.length; j++) {
@@ -81,7 +83,8 @@
               segment: segment,
               audience: audience,
               label: label,
-              score: score
+              score: score,
+              userValue: score.userValue
             });
           }
         }
@@ -159,6 +162,51 @@
       radius += radiusWidth;
       drawArc(radius, radius, 0, 90, ctrl.strategies[3],"1%", "start","15px");
     }
+    
+    function setupStratergyIcons(){
+        var y = -1*radiusWidth;
+        y = y + 0.32 * y;
+        var x = '-25'; 
+        var size = '55';
+        var bizStratergypng = 'Biz.png';
+        var brandStratergypng = 'brand.png';
+        var experienceStratergypng = 'exp.png';
+        var digStratergypng = 'digi.png';
+        
+        setupIcon(x,y,size,bizStratergypng, ctrl.strategies[0]);
+        y = y - radiusWidth;
+        setupIcon(x,y,'65',brandStratergypng, ctrl.strategies[1]);
+        y = y - radiusWidth;
+        setupIcon(x,y,size,experienceStratergypng, ctrl.strategies[2]);
+        y = y - radiusWidth;
+        setupIcon(x,y,size,digStratergypng, ctrl.strategies[3]);
+    }
+    
+    ctrl.getStrategyId = function(id){
+      return id.replace(' ','_');
+    }
+    function setupIcon(x, y, size, icon, strategydivId){
+        d3.selectAll("#icons")
+          .append("svg:image")
+          .attr('x', x)
+          .attr('y', y)
+          .attr('width', size)
+          .attr('height', size)
+          .attr('xlink:href', icon)
+          .on('mouseenter',function(d){
+            console.log('mouse in');
+             var stgdiv = document.getElementById(ctrl.getStrategyId(strategydivId));
+            stgdiv.style.opacity = 1;
+            stgdiv.style.left = d3.event.pageX + 30 +  "px";
+            stgdiv.style.top = d3.event.pageY - 28 + "px";
+            stgdiv.style.position = 'absolute';
+          })
+         .on('mouseleave', function(d){
+           console.log('mouse out');
+            var stgdiv = document.getElementById(ctrl.getStrategyId(strategydivId));
+           stgdiv.style.opacity = 0;
+         });
+    }
 
     ctrl.arclicked = function (data) {
       // Make a service call and save the data model
@@ -169,7 +217,10 @@
       scoreid = scoreid;
       var arc = findElement(ctrl.arcs, scoreid);
       if(arc){
-        arc.score = selectedScore;
+        arc.score.avgValue = (arc.score.avgValue + selectedScore)/2;
+        arc.score.userValue = selectedScore;
+        arc.score.userAccessed = true;
+        arc.userValue = selectedScore;
       }
       ctrl.onUpdate({selectedScore: selectedScore});
     }
